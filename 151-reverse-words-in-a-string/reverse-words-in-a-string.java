@@ -1,45 +1,24 @@
 class Solution {
     public String reverseWords(String s) {
 
-        // Remove leading and trailing spaces
-        s = s.trim();
-
-        StringBuilder str = new StringBuilder();
-
-        // Remove multiple spaces
-        for (int i = 0; i < s.length(); i++) {
-            if (s.charAt(i) != ' ' || 
-                (i > 0 && s.charAt(i - 1) != ' ')) {
-                str.append(s.charAt(i));
-            }
-        }
-
-        // Step 1: Reverse each individual word
-        int start = 0;
-
-        for (int i = 0; i <= str.length(); i++) {
-
-            if (i == str.length() || str.charAt(i) == ' ') {
-
-                int left = start;
-                int right = i - 1;
-
-                while (left < right) {
-                    char temp = str.charAt(left);
-                    str.setCharAt(left, str.charAt(right));
-                    str.setCharAt(right, temp);
-
-                    left++;
-                    right--;
+        s = s.trim().replaceAll("\\s+", " ");
+        StringBuilder str=new StringBuilder(s);
+        int start=0;
+        for(int i=0;i<=str.length();i++){
+            if(i == str.length() || str.charAt(i)==' '){
+                int end =i-1;
+                while(start < end){
+                    char temp=str.charAt(start);
+                    str.setCharAt(start,str.charAt(end));
+                    str.setCharAt(end,temp);
+                    start++;
+                    end--;
                 }
-
-                start = i + 1;
+                start=i+1;
             }
+            
         }
-
-        // Step 2: Reverse complete string
         str.reverse();
-
-        return str.toString();
+        return str.toString().trim();
     }
 }
