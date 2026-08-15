@@ -9,9 +9,9 @@ class Solution {
         while (sb.indexOf(part) != -1){
             index = sb.indexOf(part);
 
-            if (index != -1) {
+            //if (index != -1) {
                sb.delete(index, index + part.length());
-            }
+            //}
         }
         return sb.toString();
     }
