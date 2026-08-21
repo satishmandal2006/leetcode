@@ -1,28 +1,34 @@
 class Solution {
     public int singleNonDuplicate(int[] nums) {
+        int n=nums.length;
+        int start=0;
+        int end=n-1;
+        if(n==1){
+            return nums[0];
+        }
+        while(start <= end){
+            int mid=start + (end-start)/2;
+            if(mid == 0 && nums[0] != nums[1]) return nums[mid];
+            if(mid == n-1 && nums[n-1] != nums[n-2]) return nums[mid];
 
-        int start = 0;
-        int end = nums.length - 1;
-
-        while (start < end) {
-
-            int mid = (start + end) / 2;
-
-            // Make mid even
-            if (mid % 2 != 0) {
-                mid--;
+            if(nums[mid] != nums[mid-1] && nums[mid] != nums[mid+1]){
+                return nums[mid];
             }
 
-            // Pair is correct
-            if (nums[mid] == nums[mid + 1]) {
-                start = mid + 2;
-            } 
-            // Pair is broken, single element is on left
-            else {
-                end = mid;
+            if(mid % 2 == 0){ // even
+                if(nums[mid-1]==nums[mid]){ //left
+                    end=mid - 1;
+                }else{
+                    start=mid+1; //right
+                }
+            }else{ //odd
+                if(nums[mid-1]==nums[mid]){ 
+                    start=mid+1;
+                }else{
+                    end=mid - 1;
+                }
             }
         }
-
-        return nums[start];
+        return -1;
     }
 }
