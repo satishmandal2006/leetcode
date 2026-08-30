@@ -17,13 +17,13 @@ class Solution {
         }
         int i=1;
         int iToFind=size-n;
-        ListNode prev=head;
+        ListNode temp=head;
         while(i < iToFind){
-            prev=prev.next;
+            temp=temp.next;
             i++;
         }
 
-        prev.next=prev.next.next;
+        temp.next=temp.next.next;
         return head;
     }
 
